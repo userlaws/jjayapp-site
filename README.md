@@ -33,14 +33,14 @@ newest-first by `date`.
 
 ## Screenshots
 
-Drop real App Store screenshots (1179×2556 PNG) into `public/screenshots/` named:
+Real captures from the app live in `public/screenshots/` (portrait PNG, currently 644×1400,
+captured from the iOS Simulator and downscaled with `sips -Z 1400`):
 
-- `today.png`
-- `classes.png`
-- `events.png`
+- `professors.png` — shown inside the hero phone frame
+- `today.png`, `classes.png`, `campus.png` — the "Straight from the app" row
 
-The home page checks for these files at build time — while they're missing it renders neutral
-placeholders, and once they exist the next build shows the real images. No code change needed.
+To refresh them, replace the files and rebuild — the home page checks for them at build time
+and falls back to neutral skeleton placeholders for any that are missing. No code change needed.
 
 ## ⚠️ `assetlinks.json` placeholder
 

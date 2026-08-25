@@ -27,32 +27,35 @@ const tabs = [
   { key: 'profile', name: 'Profile', color: '#a87a20', blurb: 'Your account, your reviews, your preferences.' },
 ];
 
-// Drop real 1179×2556 PNGs into public/screenshots/ with these names and
-// the skeleton placeholders below are replaced at the next build.
+const shotDir = path.join(process.cwd(), 'public/screenshots');
+
+// Real captures from the app running in the iOS Simulator (644×1400 PNG).
+// Replace the files, rebuild, done.
+const heroShot = fs.existsSync(path.join(shotDir, 'professors.png'));
+
 const shots = [
   { file: 'today.png', label: 'Today' },
   { file: 'classes.png', label: 'Classes' },
-  { file: 'events.png', label: 'Events' },
+  { file: 'campus.png', label: 'Campus' },
 ].map((shot) => ({
   ...shot,
-  exists: fs.existsSync(path.join(process.cwd(), 'public/screenshots', shot.file)),
+  exists: fs.existsSync(path.join(shotDir, shot.file)),
 }));
 ---
 
 <Base
-  title="JJAY Campus Companion — the unofficial app for John Jay students"
-  description="Classes, campus events, facilities, and professor reviews for John Jay College — in one free iOS app. An independent student project."
+  title="JJAY Campus Companion — the app for John Jay students"
+  description="Classes, campus events, facilities, and professor reviews for John Jay College — in one free iOS app."
   wide
 >
   <section class="hero">
     <div class="hero-copy">
-      <p class="chip fade-up">Unofficial · Built by a student</p>
-      <h1 class="fade-up" style="animation-delay: 40ms">John Jay,<br />in your pocket.</h1>
-      <p class="lede fade-up" style="animation-delay: 80ms">
+      <h1 class="fade-up">John Jay,<br />in your pocket.</h1>
+      <p class="lede fade-up" style="animation-delay: 40ms">
         Classes, campus events, building hours, and professor reviews — one free app, built by a
         John Jay student for John Jay students.
       </p>
-      <div class="hero-actions fade-up" style="animation-delay: 120ms">
+      <div class="hero-actions fade-up" style="animation-delay: 80ms">
         <a class="btn-appstore" href="https://apps.apple.com/app/id6761637912">
           <svg class="apple-logo" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
             <path
@@ -83,89 +86,76 @@ const shots = [
           ></a
         >
       </div>
-      <p class="hero-meta mono muted fade-up" style="animation-delay: 160ms">
+      <p class="hero-meta mono muted fade-up" style="animation-delay: 120ms">
         Free · No ads · Account optional · iOS only
       </p>
     </div>
 
-    <div class="hero-visual fade-up" style="animation-delay: 120ms" aria-hidden="true">
+    <div class="hero-visual fade-up" style="animation-delay: 100ms" aria-hidden="true">
       <div class="phone">
         <div class="phone-screen">
-          <div class="mock-status">
-            <span class="mock-time">9:41</span>
-            <span class="island"></span>
-            <span class="mock-time" style="visibility: hidden">9:41</span>
-          </div>
-          <div class="mock-body">
-            <p class="mock-greeting">Good morning</p>
-            <p class="mock-title">Today</p>
-
-            <div class="mock-card">
-              <span class="mock-chip">Up next</span>
-              <p class="mock-course">CJBS 101 · Intro to Criminal Justice</p>
-              <p class="mock-sub">10:50 AM – 12:05 PM · Room 3.63</p>
-            </div>
-
-            <div class="mock-card">
-              <p class="mock-label">On campus today</p>
-              <div class="mock-row">
-                <span class="mock-dot"></span>
-                <span class="mock-row-text">Fall Career Fair · L2 Atrium</span>
-                <span class="mock-row-time">12 PM</span>
-              </div>
-              <div class="mock-row">
-                <span class="mock-dot"></span>
-                <span class="mock-row-text">Chess Club · Room 1.119</span>
-                <span class="mock-row-time">1:40</span>
-              </div>
-            </div>
-
-            <div class="mock-card">
-              <div class="mock-row">
-                <span class="mock-row-text">Lloyd Sealy Library</span>
-                <span class="mock-open">Open until 10 PM</span>
-              </div>
-            </div>
-
-            <div class="mock-card">
-              <p class="mock-label">Top rated this week</p>
-              <div class="mock-row">
-                <span class="mock-row-text">Prof. J. Rivera · Criminal Law</span>
-                <span class="mock-rating">★ 4.6</span>
-              </div>
-              <div class="mock-row">
-                <span class="mock-row-text">Prof. A. Okafor · Forensic Psych</span>
-                <span class="mock-rating">★ 4.5</span>
-              </div>
-            </div>
-          </div>
-          <div class="mock-tabbar">
-            {
-              tabs.map((tab, i) => (
-                <span class={`mock-tab ${i === 0 ? 'active' : ''}`}>
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.8"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <Fragment set:html={icons[tab.key]} />
-                  </svg>
-                  <span>{tab.name}</span>
-                </span>
-              ))
-            }
-          </div>
-          <div class="mock-home"></div>
+          {
+            heroShot ? (
+              <img
+                class="phone-img"
+                src="/screenshots/professors.png"
+                alt=""
+                width="644"
+                height="1400"
+                fetchpriority="high"
+                decoding="async"
+              />
+            ) : (
+              <>
+                <div class="mock-status">
+                  <span class="mock-time">9:41</span>
+                  <span class="island" />
+                  <span class="mock-time" style="visibility: hidden">
+                    9:41
+                  </span>
+                </div>
+                <div class="mock-body">
+                  <p class="mock-greeting">Good morning</p>
+                  <p class="mock-title">Today</p>
+                  <div class="mock-card">
+                    <span class="mock-chip">Up next</span>
+                    <p class="mock-course">CJBS 101 · Intro to Criminal Justice</p>
+                    <p class="mock-sub">10:50 AM – 12:05 PM · Room 3.63</p>
+                  </div>
+                  <div class="mock-card">
+                    <div class="mock-row">
+                      <span class="mock-row-text">Lloyd Sealy Library</span>
+                      <span class="mock-open">Open until 10 PM</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="mock-tabbar">
+                  {tabs.map((tab, i) => (
+                    <span class={`mock-tab ${i === 0 ? 'active' : ''}`}>
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <Fragment set:html={icons[tab.key]} />
+                      </svg>
+                      <span>{tab.name}</span>
+                    </span>
+                  ))}
+                </div>
+                <div class="mock-home" />
+              </>
+            )
+          }
         </div>
       </div>
     </div>
   </section>
 
   <section class="route-section band" aria-labelledby="whats-inside">
-    <p class="chip">What’s inside</p>
     <h2 id="whats-inside">Five stops, one line.</h2>
     <p class="section-lede">The whole app is a tab bar — here’s the route.</p>
     <ol class="route" role="list">
@@ -195,8 +185,7 @@ const shots = [
   </section>
 
   <section class="shots-section" aria-labelledby="screenshots">
-    <p class="chip">Screenshots</p>
-    <h2 id="screenshots">A quick look</h2>
+    <h2 id="screenshots">Straight from the app</h2>
     <div class="shot-grid">
       {
         shots.map((shot) =>
@@ -206,8 +195,8 @@ const shots = [
                 <img
                   src={`/screenshots/${shot.file}`}
                   alt={`Screenshot of the ${shot.label} tab`}
-                  width="1179"
-                  height="2556"
+                  width="644"
+                  height="1400"
                   loading="lazy"
                   decoding="async"
                 />
@@ -265,15 +254,11 @@ const shots = [
     grid-template-columns: 1fr auto;
     align-items: center;
     gap: 24px 64px;
-    padding: 52px 0 28px;
+    padding: 56px 0 32px;
   }
 
   .hero-copy {
     max-width: 560px;
-  }
-
-  .hero-copy .chip {
-    margin-bottom: 1.125rem;
   }
 
   .hero h1 {
@@ -303,7 +288,7 @@ const shots = [
     margin: 0;
   }
 
-  /* ---------------------------- phone mock ----------------------------- */
+  /* ---------------------------- phone frame ----------------------------- */
 
   .hero-visual {
     justify-self: end;
@@ -320,11 +305,20 @@ const shots = [
   .phone-screen {
     display: flex;
     flex-direction: column;
-    aspect-ratio: 1179 / 2556;
+    aspect-ratio: 644 / 1400;
     border-radius: 40px;
     overflow: hidden;
     background: var(--bg);
   }
+
+  .phone-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* mock fallback, used only until a real hero screenshot exists */
 
   .mock-status {
     display: flex;
@@ -399,28 +393,11 @@ const shots = [
     color: var(--text-tertiary);
   }
 
-  .mock-label {
-    margin: 0 0 6px;
-    font-size: 9px;
-    font-weight: 650;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--text-tertiary);
-  }
-
   .mock-row {
     display: flex;
     align-items: center;
     gap: 6px;
     padding: 3px 0;
-  }
-
-  .mock-dot {
-    width: 5px;
-    height: 5px;
-    border-radius: 999px;
-    background: var(--accent);
-    flex: none;
   }
 
   .mock-row-text {
@@ -433,21 +410,10 @@ const shots = [
     text-overflow: ellipsis;
   }
 
-  .mock-row-time {
-    font-size: 10px;
-    color: var(--text-tertiary);
-  }
-
   .mock-open {
     font-size: 10px;
     font-weight: 550;
     color: var(--accent-text);
-  }
-
-  .mock-rating {
-    font-size: 10px;
-    font-weight: 600;
-    color: var(--gold-text);
   }
 
   .mock-tabbar {
@@ -494,7 +460,7 @@ const shots = [
 
   .route-section h2,
   .shots-section h2 {
-    margin: 0.875rem 0 0.5rem;
+    margin: 0 0 0.5rem;
     font-size: 1.75rem;
   }
 
@@ -586,7 +552,7 @@ const shots = [
   }
 
   .shot {
-    aspect-ratio: 1179 / 2556;
+    aspect-ratio: 644 / 1400;
     border-radius: 26px;
     border: 0.5px solid var(--hairline);
     background: var(--surface);

@@ -161,20 +161,6 @@ a {
   font-size: 0.9375rem;
 }
 
-/* signage chip: squared, ink, uppercase — the station-sign voice */
-.chip {
-  display: inline-flex;
-  align-items: center;
-  background: var(--ink);
-  color: #ffffff;
-  font-size: 0.6875rem;
-  font-weight: 650;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-  padding: 5px 10px;
-  border-radius: 4px;
-}
-
 /* data voice: versions, dates, times */
 .mono {
   font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, monospace;
@@ -211,12 +197,30 @@ a {
 
 /* --------------------------------- header ----------------------------------- */
 
+/* glass header, iOS-style: transparent over the hero, frosted once you scroll,
+   and it collapses to a compact bar */
 .site-header {
   position: sticky;
   top: 0;
   z-index: 20;
-  background: var(--surface);
-  border-bottom: 0.5px solid var(--hairline);
+  background: rgba(255, 255, 255, 0.55);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 0.5px solid transparent;
+  transition: background-color 250ms ease, border-color 250ms ease;
+}
+
+.site-header.is-scrolled {
+  background: rgba(255, 255, 255, 0.72);
+  border-bottom-color: var(--hairline);
+}
+
+/* no backdrop-filter support → solid enough to stay readable */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .site-header,
+  .site-header.is-scrolled {
+    background: rgba(255, 255, 255, 0.95);
+  }
 }
 
 .site-header > .wrap {
@@ -224,7 +228,18 @@ a {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  min-height: 64px;
+  min-height: 72px;
+  transition: min-height 320ms var(--ease-out);
+}
+
+.site-header.is-scrolled > .wrap {
+  min-height: 54px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header > .wrap {
+    transition: none;
+  }
 }
 
 .brand {

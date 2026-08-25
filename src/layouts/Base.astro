@@ -86,5 +86,15 @@ const nav = [
         <p class="copyright">© 2026 JJAY Campus Companion</p>
       </div>
     </footer>
+
+    <script is:inline>
+      (() => {
+        const header = document.querySelector('.site-header');
+        if (!header) return;
+        const update = () => header.classList.toggle('is-scrolled', window.scrollY > 4);
+        update();
+        window.addEventListener('scroll', update, { passive: true });
+      })();
+    </script>
   </body>
 </html>
