@@ -45,12 +45,12 @@ const shots = [
   <section class="hero">
     <div class="hero-copy">
       <p class="eyebrow fade-up">For John Jay students</p>
-      <h1 class="fade-up" style="animation-delay: 60ms">John Jay,<br />in your pocket.</h1>
-      <p class="lede fade-up" style="animation-delay: 120ms">
+      <h1 class="fade-up" style="animation-delay: 40ms">John Jay,<br />in your pocket.</h1>
+      <p class="lede fade-up" style="animation-delay: 80ms">
         Classes, campus events, building hours, and professor reviews — one free app, built by a
         John Jay student for John Jay students.
       </p>
-      <div class="hero-actions fade-up" style="animation-delay: 180ms">
+      <div class="hero-actions fade-up" style="animation-delay: 120ms">
         <a class="btn-appstore" href="https://apps.apple.com/app/id6761637912">
           <svg class="apple-logo" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
             <path
@@ -62,14 +62,31 @@ const shots = [
             <strong>App Store</strong>
           </span>
         </a>
-        <a class="hero-changelog" href="/changelog">What’s new →</a>
+        <a class="hero-changelog t-learn" href="/changelog"
+          >What’s new
+          <span class="t-learn-chevron"
+            ><svg
+              viewBox="0 0 16 16"
+              width="16"
+              height="16"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              aria-hidden="true"
+            >
+              <path class="t-learn-arm t-learn-arm-top" d="M6 4L10 8"></path>
+              <path class="t-learn-arm t-learn-arm-bot" d="M10 8L6 12"></path>
+            </svg></span
+          ></a
+        >
       </div>
-      <p class="hero-meta muted small fade-up" style="animation-delay: 240ms">
+      <p class="hero-meta muted small fade-up" style="animation-delay: 160ms">
         Free · No ads · Account optional · iOS only for now
       </p>
     </div>
 
-    <div class="hero-visual fade-up" style="animation-delay: 200ms" aria-hidden="true">
+    <div class="hero-visual fade-up" style="animation-delay: 120ms" aria-hidden="true">
       <div class="phone">
         <div class="phone-screen">
           <div class="mock-status">
@@ -145,7 +162,7 @@ const shots = [
     </div>
   </section>
 
-  <section class="tabs-section" aria-labelledby="whats-inside">
+  <section class="tabs-section band" aria-labelledby="whats-inside">
     <p class="eyebrow">What’s inside</p>
     <h2 id="whats-inside">Five tabs, no clutter.</h2>
     <ul class="tab-grid" role="list">
@@ -240,7 +257,7 @@ const shots = [
   }
 
   .hero h1 {
-    font-size: clamp(2.4rem, 5.5vw, 3.4rem);
+    font-size: clamp(2.5rem, 5.5vw, 3.5rem);
     margin: 0 0 1rem;
   }
 
@@ -253,15 +270,11 @@ const shots = [
   }
 
   .hero-changelog {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
     font-weight: 500;
     text-decoration: none;
-  }
-
-  @media (hover: hover) and (pointer: fine) {
-    .hero-changelog:hover {
-      text-decoration: underline;
-      text-underline-offset: 3px;
-    }
   }
 
   .hero-meta {
@@ -279,7 +292,7 @@ const shots = [
     padding: 10px;
     border-radius: 50px;
     background: #101014;
-    border: 1px solid var(--hairline);
+    box-shadow: var(--shadow-lift);
   }
 
   .phone-screen {
@@ -289,16 +302,6 @@ const shots = [
     border-radius: 40px;
     overflow: hidden;
     background: var(--bg);
-  }
-
-  @media (prefers-color-scheme: dark) {
-    .phone {
-      background: #17171b;
-    }
-
-    .phone-screen {
-      background: #0a0a0c;
-    }
   }
 
   .mock-status {
@@ -422,7 +425,7 @@ const shots = [
   .mock-rating {
     font-size: 10px;
     font-weight: 600;
-    color: var(--gold);
+    color: var(--gold-text);
   }
 
   .mock-tabbar {
@@ -462,14 +465,23 @@ const shots = [
 
   /* ----------------------------- sections ------------------------------ */
 
-  .tabs-section,
+  .tabs-section {
+    margin-top: 3.5rem;
+    padding: 3.5rem 0 4rem;
+  }
+
   .shots-section {
-    padding-top: 3.5rem;
+    padding-top: 4rem;
   }
 
   .tabs-section h2,
   .shots-section h2 {
     margin-top: 0;
+  }
+
+  .tab-card {
+    background: var(--bg);
+    box-shadow: none;
   }
 
   .tab-grid {
@@ -533,6 +545,7 @@ const shots = [
     border: 0.5px solid var(--hairline);
     background: var(--surface);
     overflow: hidden;
+    box-shadow: var(--shadow-card);
   }
 
   .shot img {
@@ -584,11 +597,14 @@ const shots = [
 
   /* ----------------------------- entrance ------------------------------- */
 
+  /* texts-reveal motion (transitions.dev), as a load-time animation:
+     blurred 12px rise, 40ms stagger via inline animation-delay */
   @media (prefers-reduced-motion: no-preference) {
     .fade-up {
       opacity: 0;
-      transform: translateY(10px);
-      animation: fade-up 550ms var(--ease-out) forwards;
+      transform: translateY(var(--stagger-distance));
+      filter: blur(var(--stagger-blur));
+      animation: fade-up var(--stagger-dur) var(--stagger-ease) forwards;
     }
   }
 
@@ -596,6 +612,7 @@ const shots = [
     to {
       opacity: 1;
       transform: translateY(0);
+      filter: blur(0);
     }
   }
 
