@@ -1,0 +1,126 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+
+const MONTHS = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
+
+function formatDate(date: string): string {
+  const [year, month, day] = date.split('-');
+  const name = MONTHS[Number(month) - 1];
+  return day ? `${name} ${Number(day)}, ${year}` : `${name} ${year}`;
+}
+
+const releases = (await getCollection('changelog')).sort((a, b) =>
+  b.data.date.localeCompare(a.data.date)
+);
+
+const entries = await Promise.all(
+  releases.map(async (entry) => ({ entry, Content: (await render(entry)).Content }))
+);
+---
+
+<Base
+  title="Changelog — JJAY Campus Companion"
+  description="Every JJAY Campus Companion release — App Store builds and over-the-air updates — in one place."
+>
+  <h1>Changelog</h1>
+  <p class="lede">
+    Some fixes ship as over-the-air updates that replace the app’s code in place without a new
+    App Store build, so they never appear in the App Store’s “What’s New” — every release, both
+    kinds, is listed here.
+  </p>
+
+  {
+    entries.map(({ entry, Content }) => (
+      <article class="release" id={entry.id}>
+        <div class="release-meta">
+          <span class={`tag ${entry.data.type === 'ota' ? 'tag-ota' : 'tag-binary'}`}>
+            {entry.data.type === 'ota' ? 'OTA update' : 'App Store release'}
+          </span>
+          <span class="release-version">v{entry.data.version}</span>
+          <span aria-hidden="true">·</span>
+          <time datetime={entry.data.date}>{formatDate(entry.data.date)}</time>
+        </div>
+        <h2><a href={`#${entry.id}`}>{entry.data.title}</a></h2>
+        <div class="release-notes">
+          <Content />
+        </div>
+      </article>
+    ))
+  }
+</Base>
+
+<style>
+  h1 {
+    margin-top: 3rem;
+  }
+
+  .release {
+    border-top: 0.5px solid var(--hairline);
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    scroll-margin-top: 24px;
+  }
+
+  .release-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 0.875rem;
+    color: var(--text-tertiary);
+  }
+
+  .release-version {
+    font-weight: 600;
+    color: var(--text-secondary);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .release h2 {
+    margin: 0.75rem 0 0.5rem;
+  }
+
+  .release h2 a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .release h2 a:hover {
+      text-decoration: underline;
+      text-decoration-thickness: 1.5px;
+      text-underline-offset: 3px;
+    }
+  }
+
+  .release-notes {
+    color: var(--text-secondary);
+  }
+
+  .release-notes :global(ul) {
+    margin: 0;
+    padding-left: 1.25rem;
+  }
+
+  .release-notes :global(li) {
+    margin-bottom: 0.375rem;
+  }
+
+  .release-notes :global(li::marker) {
+    color: var(--text-tertiary);
+  }
+</style>

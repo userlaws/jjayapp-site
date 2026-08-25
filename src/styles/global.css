@@ -1,0 +1,379 @@
+/* ---------------------------------- tokens --------------------------------- */
+
+:root {
+  color-scheme: light dark;
+
+  --accent: #2857a4;
+  --accent-deep: #1b3f7e;
+  --accent-soft: #e4eaf6;
+  --accent-text: #2857a4;
+
+  --gold: #c9942e;
+  --gold-soft: rgba(201, 148, 46, 0.14);
+  --gold-text: #7a5a17;
+
+  --bg: #f6f6f8;
+  --surface: #ffffff;
+  --hairline: rgba(0, 0, 0, 0.1);
+
+  --text-primary: #111114;
+  --text-secondary: #3c3c43;
+  --text-tertiary: #8e8e93;
+
+  --radius-card: 14px;
+  --radius-btn: 14px;
+  --radius-pill: 999px;
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+
+  --font: -apple-system, "SF Pro", system-ui, "Segoe UI", Roboto, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --accent: #4a79cb;
+    --accent-deep: #5e88d4;
+    --accent-soft: rgba(74, 121, 203, 0.2);
+    --accent-text: #7ea4e5;
+
+    --gold: #d9a94a;
+    --gold-soft: rgba(217, 169, 74, 0.16);
+    --gold-text: #d9a94a;
+
+    --bg: #000000;
+    --surface: #232327;
+    --hairline: rgba(255, 255, 255, 0.14);
+
+    --text-primary: #f2f2f7;
+    --text-secondary: rgba(235, 235, 245, 0.85);
+    --text-tertiary: rgba(235, 235, 245, 0.65);
+  }
+}
+
+/* ----------------------------------- base ----------------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: var(--font);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text-primary);
+  font-size: 1.0625rem; /* 17px, iOS body size */
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+  width: 100%;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: clamp(1.9rem, 5vw, 2.6rem);
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+}
+
+h2 {
+  font-size: 1.375rem;
+  font-weight: 650;
+  margin: 2.5rem 0 0.75rem;
+}
+
+h3 {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  margin: 1.5rem 0 0.375rem;
+}
+
+p {
+  margin: 0 0 1rem;
+}
+
+a {
+  color: var(--accent-text);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  transition: color 150ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  a:hover {
+    color: var(--accent-deep);
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: var(--accent-soft);
+}
+
+.wrap {
+  width: 100%;
+  max-width: 720px;
+  margin-inline: auto;
+  padding-inline: 20px;
+}
+
+.wrap-wide {
+  max-width: 1040px;
+}
+
+.lede {
+  color: var(--text-secondary);
+  font-size: 1.125rem;
+  max-width: 56ch;
+}
+
+.muted {
+  color: var(--text-tertiary);
+}
+
+.small {
+  font-size: 0.9375rem;
+}
+
+/* ------------------------------- skip link ---------------------------------- */
+
+.skip-link {
+  position: absolute;
+  left: 20px;
+  top: -100%;
+  z-index: 10;
+  background: var(--surface);
+  color: var(--accent-text);
+  padding: 10px 16px;
+  border-radius: var(--radius-btn);
+  border: 0.5px solid var(--hairline);
+}
+
+.skip-link:focus-visible {
+  top: 12px;
+}
+
+/* --------------------------------- header ----------------------------------- */
+
+.site-header {
+  border-bottom: 0.5px solid var(--hairline);
+}
+
+.site-header > .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 60px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: 650;
+  font-size: 0.9375rem;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.brand-mark {
+  width: 28px;
+  height: 28px;
+  flex: none;
+}
+
+@media (max-width: 430px) {
+  .brand span {
+    display: none;
+  }
+}
+
+.site-nav {
+  display: flex;
+  gap: 2px;
+}
+
+.site-nav a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  transition: color 150ms ease, background-color 150ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .site-nav a:hover {
+    color: var(--accent-text);
+    background: var(--accent-soft);
+  }
+}
+
+.site-nav a[aria-current="page"] {
+  color: var(--accent-text);
+}
+
+/* --------------------------------- footer ----------------------------------- */
+
+.site-footer {
+  border-top: 0.5px solid var(--hairline);
+  margin-top: 5rem;
+  padding: 2rem 0 2.5rem;
+  font-size: 0.875rem;
+  color: var(--text-tertiary);
+}
+
+.site-footer .footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 20px;
+  margin-bottom: 1.25rem;
+}
+
+.site-footer a {
+  color: var(--text-secondary);
+}
+
+.site-footer .disclaimer {
+  max-width: 64ch;
+  margin-bottom: 0.75rem;
+}
+
+.site-footer .copyright {
+  margin: 0;
+}
+
+/* --------------------------------- buttons ---------------------------------- */
+
+.btn-appstore {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  background: #000000;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: var(--radius-btn);
+  padding: 11px 22px 11px 18px;
+  transition: transform 160ms var(--ease-out), background-color 150ms ease;
+}
+
+.btn-appstore:active {
+  transform: scale(0.97);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn-appstore:hover {
+    background: #1c1c21;
+    color: #ffffff;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .btn-appstore {
+    border: 0.5px solid var(--hairline);
+  }
+}
+
+.btn-appstore .apple-logo {
+  width: 26px;
+  height: 26px;
+  flex: none;
+}
+
+.btn-appstore .badge-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.15;
+  text-align: left;
+}
+
+.btn-appstore .badge-text small {
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+.btn-appstore .badge-text strong {
+  font-size: 1.1875rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* ----------------------------------- tags ------------------------------------ */
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+}
+
+.tag-binary {
+  color: var(--accent-text);
+  background: var(--accent-soft);
+}
+
+.tag-ota {
+  color: var(--gold-text);
+  background: var(--gold-soft);
+}
+
+/* ----------------------------------- cards ----------------------------------- */
+
+.card {
+  background: var(--surface);
+  border: 0.5px solid var(--hairline);
+  border-radius: var(--radius-card);
+  padding: 20px;
+}
+
+/* -------------------------------- reduced motion ----------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .btn-appstore,
+  .btn-appstore:active {
+    transition: background-color 150ms ease;
+    transform: none;
+  }
+}

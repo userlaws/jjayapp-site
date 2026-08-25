@@ -1,0 +1,90 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  wide?: boolean;
+}
+
+const { title, description, wide = false } = Astro.props;
+const wrapClass = wide ? 'wrap wrap-wide' : 'wrap';
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const nav = [
+  { href: '/changelog', label: 'Changelog' },
+  { href: '/support', label: 'Support' },
+];
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="JJAY Campus Companion" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#F6F6F8" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000000" />
+    <meta name="generator" content={Astro.generator} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <div class={wrapClass}>
+        <a class="brand" href="/" aria-label="JJAY Campus Companion — home">
+          <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
+            <rect width="64" height="64" rx="14" fill="var(--accent)"></rect>
+            <text
+              x="32"
+              y="43"
+              text-anchor="middle"
+              font-family="inherit"
+              font-size="30"
+              font-weight="700"
+              fill="#fff">JJ</text
+            >
+          </svg>
+          <span>JJAY Campus Companion</span>
+        </a>
+        <nav class="site-nav" aria-label="Site">
+          {
+            nav.map((item) => (
+              <a href={item.href} aria-current={path === item.href ? 'page' : undefined}>
+                {item.label}
+              </a>
+            ))
+          }
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <div class={wrapClass}>
+        <slot />
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class={wrapClass}>
+        <nav class="footer-nav" aria-label="Footer">
+          <a href="/changelog">Changelog</a>
+          <a href="/support">Support</a>
+          <a href="/privacy">Privacy</a>
+          <a href="mailto:support@jjayapp.com">support@jjayapp.com</a>
+        </nav>
+        <p class="disclaimer">
+          JJAY Campus Companion is an independent student project. It is not affiliated with,
+          endorsed by, or sponsored by John Jay College of Criminal Justice or The City University
+          of New York.
+        </p>
+        <p class="copyright">© 2026 JJAY Campus Companion</p>
+      </div>
+    </footer>
+  </body>
+</html>

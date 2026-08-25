@@ -1,0 +1,128 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base
+  title="Privacy — JJAY Campus Companion"
+  description="What JJAY Campus Companion stores, where it comes from, and how to delete it. No ads, no tracking, no selling data."
+>
+  <h1>Privacy</h1>
+  <p class="muted small">Effective August 24, 2026</p>
+
+  <div class="card summary">
+    <p>
+      <strong>The short version:</strong> you can use the app without an account. If you make one,
+      we store your CUNY email, the reviews and tags you post, and your preferences — nothing else.
+      No ads, no tracking, no selling data. Delete your account in the app and everything tied to
+      it goes with it.
+    </p>
+  </div>
+
+  <h2>An account is optional</h2>
+  <p>
+    You can browse everything in JJAY Campus Companion — classes, events, campus facilities, and
+    professor reviews — without signing up. Anonymous browsing sends us nothing that identifies
+    you.
+  </p>
+
+  <h2>Signing up requires a CUNY email</h2>
+  <p>
+    Creating an account requires an email address at one of these domains:
+    <code>@login.cuny.edu</code>, <code>@jjay.cuny.edu</code>, or
+    <code>@stu-mail.jjay.cuny.edu</code>. This keeps accounts limited to the CUNY community.
+  </p>
+
+  <h2>What we store</h2>
+  <p>If you create an account, we store:</p>
+  <ul>
+    <li>Your email address.</li>
+    <li>The professor reviews and tags you post.</li>
+    <li>Your account preferences.</li>
+  </ul>
+  <p>
+    That data lives in <a href="https://supabase.com">Supabase</a>, the backend service the app is
+    built on.
+  </p>
+
+  <h2>Where the app’s data comes from</h2>
+  <ul>
+    <li>
+      Professor statistics come from <a href="https://www.ratemyprofessors.com">RateMyProfessors</a>.
+    </li>
+    <li>
+      Events and calendar data are gathered from public pages on
+      <a href="https://www.jjay.cuny.edu">jjay.cuny.edu</a>.
+    </li>
+  </ul>
+
+  <h2>What we don’t do</h2>
+  <ul>
+    <li>No ads.</li>
+    <li>No selling or sharing your data.</li>
+    <li>No tracking SDKs, no analytics, no cookies.</li>
+  </ul>
+
+  <h2>Deleting your account</h2>
+  <p>
+    Use <strong>Delete account</strong> in the app (in the Profile tab). It removes your account
+    and everything tied to it — your email, your reviews and tags, and your preferences.
+  </p>
+
+  <h2>Contact</h2>
+  <p>
+    Questions about this policy or your data:
+    <a href="mailto:support@jjayapp.com">support@jjayapp.com</a>.
+  </p>
+
+  <h2>Not affiliated</h2>
+  <p>
+    JJAY Campus Companion is an independent student project. It is not affiliated with, endorsed
+    by, or sponsored by John Jay College of Criminal Justice or The City University of New York.
+  </p>
+
+  <h2>Changes to this policy</h2>
+  <p>
+    If this policy changes, the new version is posted here with an updated effective date.
+  </p>
+</Base>
+
+<style>
+  h1 {
+    margin-top: 3rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .summary {
+    margin: 1.5rem 0 0;
+  }
+
+  .summary p {
+    margin: 0;
+    color: var(--text-secondary);
+  }
+
+  code {
+    font-size: 0.9375em;
+    background: var(--surface);
+    border: 0.5px solid var(--hairline);
+    border-radius: 6px;
+    padding: 1px 6px;
+  }
+
+  ul {
+    padding-left: 1.25rem;
+    color: var(--text-secondary);
+  }
+
+  li {
+    margin-bottom: 0.375rem;
+  }
+
+  li::marker {
+    color: var(--text-tertiary);
+  }
+
+  p {
+    color: var(--text-secondary);
+  }
+</style>

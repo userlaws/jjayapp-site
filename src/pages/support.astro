@@ -1,0 +1,123 @@
+---
+import Base from '../layouts/Base.astro';
+
+const faqs = [
+  {
+    q: 'I can’t sign up',
+    a: 'Check that you’re using a CUNY email address — sign-up only accepts @login.cuny.edu, @jjay.cuny.edu, and @stu-mail.jjay.cuny.edu. Personal addresses like Gmail won’t work.',
+  },
+  {
+    q: 'I didn’t get the verification or reset code',
+    a: 'Check your spam or junk folder first — CUNY inboxes are strict. Codes expire after a short while, so use the newest one. If you resend, wait 60 seconds between attempts; rapid resends are ignored.',
+  },
+  {
+    q: 'How do I delete my account?',
+    a: 'In the app, open the Profile tab and choose Delete account. This removes your account and everything tied to it — your email, reviews, tags, and preferences. It can’t be undone.',
+  },
+  {
+    q: 'How do I report a review?',
+    a: 'Email support@jjayapp.com with the professor’s name and the review text (a screenshot works). We’ll take a look and remove anything that breaks the rules.',
+  },
+];
+---
+
+<Base
+  title="Support — JJAY Campus Companion"
+  description="Get help with JJAY Campus Companion: sign-up issues, verification codes, deleting your account, and reporting reviews."
+>
+  <h1>Support</h1>
+  <p class="lede">
+    Email <a href="mailto:support@jjayapp.com">support@jjayapp.com</a> — every message is read by
+    the person who builds the app.
+  </p>
+
+  <h2>Common questions</h2>
+  <div class="faq-list">
+    {
+      faqs.map((faq) => (
+        <details class="faq">
+          <summary>
+            {faq.q}
+            <svg class="chevron" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
+              <path
+                d="M6 3.5 10.5 8 6 12.5"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </summary>
+          <p>{faq.a}</p>
+        </details>
+      ))
+    }
+  </div>
+
+  <h2>Wondering what changed?</h2>
+  <p>
+    Updates often arrive without an App Store release — the
+    <a href="/changelog">changelog</a> lists every one.
+  </p>
+</Base>
+
+<style>
+  h1 {
+    margin-top: 3rem;
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 1.25rem;
+  }
+
+  .faq {
+    background: var(--surface);
+    border: 0.5px solid var(--hairline);
+    border-radius: var(--radius-card);
+    padding: 0 20px;
+  }
+
+  .faq summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 0;
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .faq summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .chevron {
+    flex: none;
+    color: var(--text-tertiary);
+    transition: transform 200ms var(--ease-out);
+  }
+
+  .faq[open] .chevron {
+    transform: rotate(90deg);
+  }
+
+  .faq > p {
+    margin: 0 0 1rem;
+    color: var(--text-secondary);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .chevron {
+      transition: none;
+    }
+  }
+
+  p {
+    color: var(--text-secondary);
+  }
+</style>
