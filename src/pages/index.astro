@@ -286,12 +286,24 @@ const shots = [
 
   .hero-meta {
     margin: 0;
+    text-wrap: balance;
   }
 
   /* ---------------------------- phone frame ----------------------------- */
 
   .hero-visual {
+    position: relative;
     justify-self: end;
+  }
+
+  /* soft accent glow lifting the phone off the page */
+  .hero-visual::before {
+    content: '';
+    position: absolute;
+    inset: -48px -72px;
+    z-index: -1;
+    background: radial-gradient(50% 46% at 50% 44%, rgba(40, 87, 164, 0.16), transparent 72%);
+    pointer-events: none;
   }
 
   .phone {
@@ -303,6 +315,7 @@ const shots = [
   }
 
   .phone-screen {
+    position: relative;
     display: flex;
     flex-direction: column;
     aspect-ratio: 644 / 1400;
@@ -311,7 +324,10 @@ const shots = [
     background: var(--bg);
   }
 
+  /* absolutely positioned so flex sizing can never distort or crop it */
   .phone-img {
+    position: absolute;
+    inset: 0;
     display: block;
     width: 100%;
     height: 100%;
@@ -661,7 +677,44 @@ const shots = [
     }
   }
 
+  /* ------------------------- scroll reveals ----------------------------- */
+
+  /* progressive: browsers with scroll-driven animations get a rise-in as
+     stops enter the viewport; everyone else just sees them */
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .stop {
+        animation: rise-in both;
+        animation-timeline: view();
+        animation-range: entry 0% entry 55%;
+      }
+    }
+  }
+
+  @keyframes rise-in {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
   /* ----------------------------- responsive ----------------------------- */
+
+  @media (min-width: 721px) {
+    @supports (animation-timeline: view()) {
+      @media (prefers-reduced-motion: no-preference) {
+        .shot-figure {
+          animation: rise-in both;
+          animation-timeline: view();
+          animation-range: entry 0% entry 55%;
+        }
+      }
+    }
+  }
 
   @media (max-width: 880px) {
     .hero {
@@ -669,13 +722,53 @@ const shots = [
       padding-top: 36px;
     }
 
+    .hero-copy {
+      max-width: 560px;
+      margin-inline: auto;
+      text-align: center;
+    }
+
+    .hero-actions {
+      justify-content: center;
+    }
+
     .hero-visual {
       justify-self: center;
-      padding-top: 16px;
+      padding-top: 20px;
     }
 
     .phone {
       width: 258px;
+    }
+  }
+
+  /* mobile: screenshots become a swipeable snap carousel, edge to edge */
+  @media (max-width: 720px) {
+    .shot-grid {
+      display: flex;
+      gap: 16px;
+      max-width: none;
+      margin-inline: -24px;
+      padding: 4px 24px 14px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .shot-grid::-webkit-scrollbar {
+      display: none;
+    }
+
+    .shot-figure {
+      flex: 0 0 62vw;
+      max-width: 250px;
+      scroll-snap-align: center;
+    }
+
+    .cta-inner {
+      flex-direction: column;
+      text-align: center;
     }
   }
 
