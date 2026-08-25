@@ -12,9 +12,11 @@
   --gold-soft: rgba(201, 148, 46, 0.14);
   --gold-text: #7a5a17;
 
-  --bg: #f6f6f8;
+  --bg: #f5f5f2; /* warm porcelain tile, not default SaaS gray */
   --surface: #ffffff;
   --hairline: rgba(0, 0, 0, 0.1);
+  --ink: #0e0e11; /* signage black */
+  --track: rgba(14, 14, 17, 0.16); /* route lines */
 
   --text-primary: #111114;
   --text-secondary: #3c3c43;
@@ -157,6 +159,27 @@ a {
 
 .small {
   font-size: 0.9375rem;
+}
+
+/* signage chip: squared, ink, uppercase — the station-sign voice */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  background: var(--ink);
+  color: #ffffff;
+  font-size: 0.6875rem;
+  font-weight: 650;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+/* data voice: versions, dates, times */
+.mono {
+  font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, monospace;
+  font-size: 0.8125rem;
+  letter-spacing: 0.01em;
 }
 
 /* full-bleed band: paints the section background edge-to-edge
@@ -418,8 +441,8 @@ a {
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.03em;
-  padding: 3px 10px;
-  border-radius: var(--radius-pill);
+  padding: 3px 9px;
+  border-radius: 5px; /* squared, signage-style */
   white-space: nowrap;
 }
 

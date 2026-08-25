@@ -43,24 +43,26 @@ const entries = await Promise.all(
     kinds, is listed here.
   </p>
 
-  {
-    entries.map(({ entry, Content }) => (
-      <article class="release" id={entry.id}>
-        <div class="release-meta">
-          <span class={`tag ${entry.data.type === 'ota' ? 'tag-ota' : 'tag-binary'}`}>
-            {entry.data.type === 'ota' ? 'OTA update' : 'App Store release'}
-          </span>
-          <span class="release-version">v{entry.data.version}</span>
-          <span aria-hidden="true">·</span>
-          <time datetime={entry.data.date}>{formatDate(entry.data.date)}</time>
-        </div>
-        <h2><a href={`#${entry.id}`}>{entry.data.title}</a></h2>
-        <div class="release-notes">
-          <Content />
-        </div>
-      </article>
-    ))
-  }
+  <div class="timeline">
+    {
+      entries.map(({ entry, Content }) => (
+        <article class="release" id={entry.id} data-type={entry.data.type}>
+          <div class="release-meta mono">
+            <span class={`tag ${entry.data.type === 'ota' ? 'tag-ota' : 'tag-binary'}`}>
+              {entry.data.type === 'ota' ? 'OTA update' : 'App Store release'}
+            </span>
+            <span class="release-version">v{entry.data.version}</span>
+            <span aria-hidden="true">·</span>
+            <time datetime={entry.data.date}>{formatDate(entry.data.date)}</time>
+          </div>
+          <h2><a href={`#${entry.id}`}>{entry.data.title}</a></h2>
+          <div class="release-notes">
+            <Content />
+          </div>
+        </article>
+      ))
+    }
+  </div>
 </Base>
 
 <style>
@@ -68,11 +70,50 @@ const entries = await Promise.all(
     margin-top: 3rem;
   }
 
+  /* the changelog is a timeline, so it's drawn as one: a line with a stop
+     per release — blue for App Store builds, gold for OTA updates */
+  .timeline {
+    position: relative;
+    padding-left: 38px;
+    margin-top: 3rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    bottom: 10px;
+    left: 10px;
+    width: 4px;
+    border-radius: 2px;
+    background: var(--track);
+  }
+
   .release {
-    border-top: 0.5px solid var(--hairline);
-    margin-top: 2.5rem;
-    padding-top: 2rem;
-    scroll-margin-top: 24px;
+    position: relative;
+    margin-top: 3rem;
+    scroll-margin-top: 88px;
+  }
+
+  .release:first-child {
+    margin-top: 0;
+  }
+
+  .release::before {
+    content: '';
+    position: absolute;
+    left: -36px;
+    top: 4px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 3px solid var(--surface);
+    box-shadow: 0 1px 3px rgba(14, 14, 17, 0.25);
+  }
+
+  .release[data-type='ota']::before {
+    background: var(--gold);
   }
 
   .release-meta {
@@ -80,8 +121,11 @@ const entries = await Promise.all(
     align-items: center;
     flex-wrap: wrap;
     gap: 10px;
-    font-size: 0.875rem;
     color: var(--text-tertiary);
+  }
+
+  .release-meta .tag {
+    font-family: var(--font);
   }
 
   .release-version {
