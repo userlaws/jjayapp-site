@@ -48,6 +48,24 @@ const shots = [
   description="Classes, campus events, facilities, and professor reviews for John Jay College — in one free iOS app."
   wide
 >
+  <script
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'MobileApplication',
+      name: 'JJAY Campus Companion',
+      operatingSystem: 'iOS',
+      applicationCategory: 'EducationApplication',
+      description:
+        'Classes, campus events, building hours, and professor reviews for John Jay College students — in one free iOS app.',
+      url: 'https://jjayapp.com',
+      image: 'https://jjayapp.com/icon-180.png',
+      installUrl: 'https://apps.apple.com/app/id6761637912',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    })}
+  />
+
   <section class="hero">
     <div class="hero-copy">
       <img class="app-icon fade-up" src="/icon-160.png" alt="" width="160" height="160" />

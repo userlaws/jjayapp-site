@@ -10,6 +10,8 @@ interface Props {
 const { title, description, wide = false } = Astro.props;
 const wrapClass = wide ? 'wrap wrap-wide' : 'wrap';
 const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL('/og.png', Astro.site);
 const nav = [
   { href: '/changelog', label: 'Changelog' },
   { href: '/support', label: 'Support' },
@@ -24,13 +26,28 @@ const nav = [
     <meta name="description" content={description} />
     <link rel="icon" type="image/png" href="/icon-64.png" />
     <link rel="apple-touch-icon" href="/icon-180.png" />
-    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <link rel="canonical" href={canonical} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="JJAY Campus Companion" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="JJAY Campus Companion — one app for John Jay students, free on the App Store"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="apple-itunes-app" content="app-id=6761637912" />
     <meta name="theme-color" content="#FFFFFF" />
     <meta name="generator" content={Astro.generator} />
+    <slot name="head" />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>

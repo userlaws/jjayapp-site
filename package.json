@@ -9,9 +9,11 @@
     "preview": "astro preview",
     "astro": "astro",
     "new:ota": "node scripts/new-entry.mjs ota",
-    "new:release": "node scripts/new-entry.mjs binary"
+    "new:release": "node scripts/new-entry.mjs binary",
+    "og": "\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless=new --screenshot=public/og.png --window-size=1200,630 --hide-scrollbars --force-device-scale-factor=1 scripts/og/card.html"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.3",
     "astro": "^5.0.0"
   }
 }
