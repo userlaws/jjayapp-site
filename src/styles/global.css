@@ -272,8 +272,8 @@ a {
   width: 30px;
   height: 30px;
   flex: none;
-  border-radius: 8px;
-  box-shadow: 0 1px 2px rgba(17, 17, 20, 0.12);
+  border-radius: 22%; /* iOS-squircle-ish */
+  box-shadow: 0 1px 2px rgba(17, 17, 20, 0.16);
 }
 
 @media (max-width: 470px) {
@@ -326,10 +326,12 @@ a {
   color: var(--accent-text);
 }
 
+/* download pill: gradient pulled from the app icon's blues, glassy top edge */
 .btn-pill {
   display: inline-flex;
   align-items: center;
-  background: var(--accent);
+  gap: 7px;
+  background: linear-gradient(180deg, #3f7bdb 0%, #2857a4 100%);
   color: #ffffff;
   text-decoration: none;
   font-size: 0.9375rem;
@@ -337,7 +339,18 @@ a {
   padding: 8px 17px;
   border-radius: var(--radius-pill);
   margin-left: 8px;
-  transition: background-color 150ms ease, transform 160ms var(--ease-out);
+  border: 0.5px solid rgba(27, 63, 126, 0.6);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    0 1px 2px rgba(17, 17, 20, 0.18);
+  transition: filter 150ms ease, transform 160ms var(--ease-out);
+}
+
+.btn-pill .pill-apple {
+  width: 13px;
+  height: 13px;
+  flex: none;
+  margin-top: -1px;
 }
 
 .btn-pill:active {
@@ -346,7 +359,7 @@ a {
 
 @media (hover: hover) and (pointer: fine) {
   .btn-pill:hover {
-    background: var(--accent-deep);
+    filter: brightness(1.08);
     color: #ffffff;
   }
 }

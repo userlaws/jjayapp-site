@@ -50,12 +50,13 @@ const shots = [
 >
   <section class="hero">
     <div class="hero-copy">
-      <h1 class="fade-up">John Jay,<br />in your pocket.</h1>
-      <p class="lede fade-up" style="animation-delay: 40ms">
+      <img class="app-icon fade-up" src="/icon-160.png" alt="" width="160" height="160" />
+      <h1 class="fade-up" style="animation-delay: 40ms">John Jay,<br />in your pocket.</h1>
+      <p class="lede fade-up" style="animation-delay: 80ms">
         Classes, campus events, building hours, and professor reviews — one free app, built by a
         John Jay student for John Jay students.
       </p>
-      <div class="hero-actions fade-up" style="animation-delay: 80ms">
+      <div class="hero-actions fade-up" style="animation-delay: 120ms">
         <a class="btn-appstore" href="https://apps.apple.com/app/id6761637912">
           <svg class="apple-logo" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
             <path
@@ -86,12 +87,12 @@ const shots = [
           ></a
         >
       </div>
-      <p class="hero-meta mono muted fade-up" style="animation-delay: 120ms">
+      <p class="hero-meta mono muted fade-up" style="animation-delay: 160ms">
         Free · No ads · Account optional · iOS only
       </p>
     </div>
 
-    <div class="hero-visual fade-up" style="animation-delay: 100ms" aria-hidden="true">
+    <div class="hero-visual fade-up" style="animation-delay: 120ms" aria-hidden="true">
       <div class="phone">
         <div class="phone-screen">
           {
@@ -227,9 +228,12 @@ const shots = [
 
   <section class="cta-band" aria-labelledby="get-the-app">
     <div class="cta-inner">
-      <div>
-        <h2 id="get-the-app">Free on the App&nbsp;Store.</h2>
-        <p class="cta-sub mono">iOS only · No ads · Account optional</p>
+      <div class="cta-left">
+        <img class="cta-icon" src="/icon-160.png" alt="" width="160" height="160" />
+        <div>
+          <h2 id="get-the-app">Free on the App&nbsp;Store.</h2>
+          <p class="cta-sub mono">iOS only · No ads · Account optional</p>
+        </div>
       </div>
       <a class="btn-appstore btn-appstore-inverse" href="https://apps.apple.com/app/id6761637912">
         <svg class="apple-logo" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
@@ -259,6 +263,17 @@ const shots = [
 
   .hero-copy {
     max-width: 560px;
+  }
+
+  .app-icon {
+    display: block;
+    width: 76px;
+    height: 76px;
+    border-radius: 22%;
+    box-shadow:
+      var(--shadow-card),
+      0 10px 24px rgba(40, 87, 164, 0.28);
+    margin-bottom: 1.375rem;
   }
 
   .hero h1 {
@@ -641,6 +656,20 @@ const shots = [
     gap: 24px;
   }
 
+  .cta-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .cta-icon {
+    width: 58px;
+    height: 58px;
+    border-radius: 22%;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+    flex: none;
+  }
+
   .cta-band h2 {
     color: #ffffff;
     font-size: clamp(1.5rem, 3.5vw, 2.125rem);
@@ -728,6 +757,10 @@ const shots = [
       text-align: center;
     }
 
+    .app-icon {
+      margin-inline: auto;
+    }
+
     .hero-actions {
       justify-content: center;
     }
@@ -769,6 +802,11 @@ const shots = [
     .cta-inner {
       flex-direction: column;
       text-align: center;
+    }
+
+    .cta-left {
+      flex-direction: column;
+      gap: 16px;
     }
   }
 
