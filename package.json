@@ -7,7 +7,9 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "new:ota": "node scripts/new-entry.mjs ota",
+    "new:release": "node scripts/new-entry.mjs binary"
   },
   "dependencies": {
     "astro": "^5.0.0"

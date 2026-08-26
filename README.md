@@ -14,6 +14,28 @@ npm run preview    # serve dist/ locally
 
 ## Adding a changelog entry
 
+After shipping, run one command from this repo:
+
+```bash
+npm run new:ota                      # after an `eas update`
+npm run new:release -- "Title here"  # after an App Store build
+```
+
+The script pre-fills everything it can discover: the app version from
+`../JJay-app/app.config.js`, the app repo's current commit sha, and — for OTA entries — the
+latest published update group id and message from EAS (`eas update:list`, read-only; needs the
+eas-cli login you already have). You only write the release notes. Then:
+
+```bash
+git add -A && git commit -m "Changelog: <title>" && git push
+```
+
+Vercel rebuilds on every push — the entry is live in about a minute. If the app repo lives
+somewhere else, set `APP_REPO=/path/to/app`; the EAS branch defaults to `production`
+(override with `EAS_BRANCH`).
+
+### By hand
+
 Releases live in `src/content/changelog/`, one markdown file per release. Copy an existing file,
 rename it (`YYYY-MM-DD-short-slug.md` — the filename becomes the entry's URL anchor on
 `/changelog`), and edit the frontmatter:
