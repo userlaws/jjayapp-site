@@ -1,0 +1,125 @@
+---
+---
+
+<section class="built" aria-labelledby="built-title">
+  <div class="built-copy">
+    <h2 id="built-title">Built for John Jay students.</h2>
+    <p class="built-lede">
+      JJAY is an independent student-built campus companion designed to make everyday campus
+      information easier to find.
+    </p>
+    <p class="built-disclaimer">
+      JJAY is not affiliated with, endorsed by, or maintained by John Jay College of Criminal
+      Justice or the City University of New York.
+    </p>
+  </div>
+  <div class="built-aside">
+    <span class="built-icon" aria-hidden="true">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M2.5 9.5 12 5l9.5 4.5L12 14z"></path>
+        <path d="M6 11.75V16c0 1.5 2.7 3 6 3s6-1.5 6-3v-4.25"></path>
+        <path d="M21.5 9.5V15"></path>
+      </svg>
+    </span>
+    <p>A helpful tool, built by a John Jay student, for John Jay students.</p>
+  </div>
+</section>
+
+<style>
+  .built {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 32px 48px;
+    margin-top: 40px;
+    padding: 44px 48px;
+    border-radius: 28px;
+    background: linear-gradient(135deg, #eaf2fd 0%, #f3f7fe 55%, #e6effc 100%);
+    border: 0.5px solid var(--home-hairline);
+  }
+
+  .built h2 {
+    margin: 0 0 0.625rem;
+    font-size: clamp(1.625rem, 2.6vw, 2rem);
+    font-weight: 760;
+    letter-spacing: -0.03em;
+    color: var(--home-ink);
+  }
+
+  .built-lede {
+    margin: 0 0 0.875rem;
+    max-width: 58ch;
+    font-size: 1.0625rem;
+    color: var(--text-secondary);
+  }
+
+  .built-disclaimer {
+    margin: 0;
+    max-width: 62ch;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+  }
+
+  .built-aside {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: 300px;
+    padding: 18px 20px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.85);
+    border: 0.5px solid var(--home-hairline);
+    box-shadow: var(--shadow-card);
+  }
+
+  .built-aside p {
+    margin: 0;
+    font-size: 0.9375rem;
+    font-weight: 550;
+    line-height: 1.4;
+    color: var(--home-ink);
+  }
+
+  .built-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    color: var(--home-blue);
+    background: #e4eaf6;
+  }
+
+  .built-icon svg {
+    width: 26px;
+    height: 26px;
+  }
+
+  @media (max-width: 800px) {
+    .built {
+      grid-template-columns: 1fr;
+      padding: 36px 28px;
+      border-radius: 24px;
+    }
+
+    .built-aside {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .built {
+      padding: 28px 22px;
+    }
+  }
+</style>

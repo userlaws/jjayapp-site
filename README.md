@@ -55,14 +55,22 @@ newest-first by `date`.
 
 ## Screenshots
 
-Real captures from the app live in `public/screenshots/` (portrait PNG, currently 644×1400,
-captured from the iOS Simulator and downscaled with `sips -Z 1400`):
+The home page uses two kinds of app imagery:
 
-- `professors.png` — shown inside the hero phone frame
-- `today.png`, `classes.png`, `campus.png` — the "Straight from the app" row
-
-To refresh them, replace the files and rebuild — the home page checks for them at build time
-and falls back to neutral skeleton placeholders for any that are missing. No code change needed.
+- `public/screenshots/today.png` — a real capture of the Today tab from the iOS Simulator
+  (portrait PNG, 644×1400, downscaled with `sips -Z 1400`), shown inside the hero phone frame.
+  Replace the file and rebuild; if it's missing the hero falls back to a neutral skeleton.
+  The other captures in that folder (`classes.png`, `campus.png`, `professors.png`) are kept
+  for reuse but aren't currently shown.
+- `src/assets/showcase/{today,classes,events,campus}.png` — the App Store-style
+  promotional posters (852×1846) shown in the "Straight from the app" shelf. They go
+  through Astro's `<Image>` component, which emits sized WebP variants at build time,
+  so drop in a replacement PNG with the same name and rebuild.
+  `profile.png` is kept in that folder but is not shown: its screen is generic app
+  chrome (sign-in, appearance, notifications) with none of the John Jay-specific
+  wording that makes the other four worth indexing. Flip `poster` to `true` on the
+  profile entry in `src/components/home/features.ts` and add the import back to
+  `FeatureShowcase.astro` to restore it.
 
 ## ⚠️ `assetlinks.json` placeholder
 
